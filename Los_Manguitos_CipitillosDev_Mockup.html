@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Los Manguitos | CipitillosDev</title>
+  <style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#172a40;background:#f5f7fa;line-height:1.5}
+*{box-sizing:border-box}body{margin:0}.layout{min-height:100vh;display:grid;grid-template-columns:216px minmax(0,1fr)}
+.sidebar{background:#113251;color:#fff;padding:24px 15px;display:flex;flex-direction:column;min-height:100vh}.brand{display:flex;gap:11px;align-items:center;padding:5px 5px 26px}.brand-logo{background:#dceee3;color:#126947;border-radius:12px;width:40px;height:40px;display:grid;place-items:center;font-weight:800}.brand strong{display:block;font-size:15px}.brand small{font-size:11px;opacity:.75}.sidebar nav{display:grid;gap:4px}.sidebar nav button{font:inherit;font-size:14px;background:transparent;border:0;border-radius:8px;color:#dbe8f2;text-align:left;padding:11px 13px;cursor:pointer}.sidebar nav button:hover{background:#214663;color:white}.sidebar nav button.active{background:#2b5877;color:white;font-weight:bold;border-left:3px solid #a0dac0}.sidebar-foot{margin-top:auto;padding:18px 8px 0;font-size:12px;opacity:.75;line-height:1.8}
+.main{min-width:0}.topbar{background:#fff;display:flex;align-items:center;justify-content:space-between;padding:15px 30px;border-bottom:1px solid #e1e8ee;gap:15px}.topbar strong{display:block}.topbar span{display:block;color:#667b8c;font-size:12px}.page{display:none;padding:27px 30px;max-width:1200px;margin:auto}.page.active{display:block}.page-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:20px}h1{font-size:25px;line-height:1.3;margin:0 0 5px}h2{font-size:17px;margin:0 0 11px}.page-heading p{margin:0;color:#607181}.tag{font-size:12px;color:#476174;background:#e8edf2;border-radius:14px;padding:6px 10px;white-space:nowrap}.card{background:white;border:1px solid #e2e8ee;border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px #17385208}.two-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.metric{background:white;border:1px solid #e2e8ee;border-radius:12px;padding:18px}.metric strong{display:block;font-size:28px}.metric span{font-size:12px;color:#607181}.muted,.help{color:#637589;font-size:13px}.help{background:#eef4f7;border-radius:8px;padding:10px 12px}.method{display:block;color:#677b8b;font-size:11px;margin-top:12px}label{display:block;font-size:13px;font-weight:600;color:#43576a;margin:0 0 12px}input,select{display:block;width:100%;height:40px;background:white;border:1px solid #cdd9e3;border-radius:8px;padding:8px 10px;margin-top:5px;color:#21394b;font:inherit;font-weight:normal;font-size:14px}input:focus,select:focus{outline:2px solid #8fc6ae;outline-offset:1px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}.actions{display:flex;flex-wrap:wrap;gap:8px}.btn{border:1px solid #bbcad5;border-radius:8px;padding:10px 15px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;color:#23445a;white-space:normal}.btn:hover{filter:brightness(.96)}.btn.primary{background:#196b4a;border-color:#196b4a;color:#fff}.btn.secondary{background:#e6f1f4;border-color:#c3dde6;color:#204b63}.btn.ghost{background:#fff;border-color:#d9e2e9}.btn.danger{color:#9f2d33;background:#fff2f2;border-color:#fadada}.btn:disabled{opacity:.5;cursor:not-allowed}.inline-form{display:flex;align-items:end;gap:8px}.inline-form input{margin:0;flex:1;min-width:0}.inline-form .btn{flex:none}.inline-cart{display:grid;grid-template-columns:1fr 92px auto;align-items:end;gap:8px}.inline-cart label{margin:0}.inline-cart .btn{height:40px}.result{font-size:13px;background:#f0f6fa;padding:12px;border-radius:8px;overflow-wrap:anywhere}.small-output{color:#516c7d;font-size:12px;overflow-wrap:anywhere}.table-scroll{width:100%;overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{padding:10px 9px;border-bottom:1px solid #edf0f3;vertical-align:middle}th{color:#50697a;font-size:12px;background:#f8fafb}tbody tr:hover{background:#f8fbfd}.tiny-actions{display:flex;gap:5px}.tiny-actions .btn{padding:5px 9px;font-size:11px}.empty{color:#778c9d;text-align:center;padding:20px}.pill{display:inline-block;padding:3px 9px;border-radius:20px;background:#e3f4e8;color:#206c43;font-size:11px}.pill.pending{background:#fff0cc;color:#86600c}.pill.next{background:#e7f0fa;color:#245a89}.inline-cart-list{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #edf0f3;font-size:13px}.inline-cart-list .btn{padding:4px 9px}.total-row{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:14px 0}.total-row label{margin:0}.total-row select{min-width:130px}.total-row strong{font-size:23px;display:block}.order-preview{background:#f0f6fa;padding:12px;border-radius:8px;min-height:67px}.connection{padding:6px 0;border-bottom:1px solid #edf0f3;font-size:13px}.card-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}details{margin-top:15px}summary{cursor:pointer;font-size:13px;color:#245a80;font-weight:600}.details-form{margin-top:10px}hr{border:0;border-top:1px solid #e6ecf2;margin:18px 0}#notice{margin:15px 30px 0;background:#e5f3e9;border:1px solid #bedfca;border-radius:8px;padding:12px 15px;color:#246b45;font-size:14px}#notice.error{background:#fff0f0;border-color:#edbfbf;color:#993c3c}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}.two-columns{grid-template-columns:1fr}}@media(max-width:650px){.layout{display:block}.sidebar{min-height:auto;padding:13px}.sidebar-foot{display:none}.brand{padding:0 5px 12px}.sidebar nav{display:flex;gap:4px;overflow-x:auto}.sidebar nav button{white-space:nowrap;padding:8px 10px}.topbar{padding:12px 16px}.page{padding:18px 14px}.page-heading{flex-direction:column}.metrics{grid-template-columns:1fr 1fr}.metric strong{font-size:22px}.form-grid{grid-template-columns:1fr}.inline-cart{grid-template-columns:1fr 90px}.inline-cart .btn{grid-column:span 2}.card{padding:15px}.card-heading{display:block}}
+
+</style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-logo">LM</span><div><strong>Los Manguitos</strong><small>Gestión empresarial</small></div></div>
+      <nav id="menu" aria-label="Navegación principal">
+        <button data-page="inicio" class="active">Inicio</button>
+        <button data-page="productos">Productos</button>
+        <button data-page="inventario">Inventario</button>
+        <button data-page="ventas">Ventas</button>
+        <button data-page="pedidos">Pedidos</button>
+        <button data-page="distribucion">Distribución</button>
+        <button data-page="historial">Historial</button>
+      </nav>
+      <p class="sidebar-foot">Laboratorio 3 · UNIVO<br>CipitillosDev<br><small>Datos aleatorios · uso académico</small></p>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><strong>Prototipo funcional</strong><span>Inventarios, ventas, pedidos y distribución</span></div><button type="button" class="btn ghost" id="resetTop">Reiniciar datos</button></header>
+      <div id="notice" role="status" aria-live="polite" hidden></div>
+
+      <section id="inicio" class="page active">
+        <div class="page-heading"><div><h1>Resumen del sistema</h1><p>Operaciones principales de Los Manguitos.</p></div><span class="tag">Listas · Diccionarios</span></div>
+        <div id="metrics" class="metrics"></div>
+        <div class="card"><h2>Últimos movimientos</h2><p class="muted">Se actualizan al registrar productos, inventario, ventas y pedidos.</p><div id="recent"></div></div>
+        <p class="help">Registra un producto, recibe existencias, realiza una venta, atiende pedidos y consulta una ruta. Usa «Reiniciar datos» para comenzar de nuevo.</p>
+      </section>
+
+      <section id="productos" class="page">
+        <div class="page-heading"><div><h1>Productos</h1><p>Registra productos y búscalos por código.</p></div><span class="tag">Diccionario · Árbol BST</span></div>
+        <div class="two-columns">
+          <form class="card" id="formProduct">
+            <h2 id="productFormTitle">Nuevo producto</h2>
+            <div class="form-grid"><label>Código SKU<input id="productSku" maxlength="32" placeholder="SKU-DEM-100" required></label><label>Nombre<input id="productName" placeholder="Caja de mango" required></label>
+              <label>Precio ($)<input id="productPrice" type="number" min="0" step="0.01" value="10" required></label><label>Cantidad inicial<input id="productStock" type="number" min="0" step="1" value="0" required></label>
+              <label>Ubicación inicial<select id="productLocation"></select></label><label>Categoría<input id="productCategory" value="Fruta Fresca"></label>
+              <label>Unidad<input id="productUnit" value="Caja"></label><label>Proveedor<select id="productSupplier"></select></label>
+            </div>
+            <div class="actions"><button class="btn primary" id="saveProduct" type="submit">Guardar producto</button><button class="btn ghost" id="cancelEdit" type="button" hidden>Cancelar edición</button></div>
+            <small class="method">Diccionario: createProduct() / modifyProduct()</small>
+          </form>
+          <div class="card">
+            <h2>Buscar por código</h2><form id="formSearch" class="inline-form"><input id="searchSku" placeholder="Ej. SKU-DEM-100" required><button class="btn secondary">Buscar</button></form>
+            <p id="searchResult" class="result">Escribe el SKU y presiona Buscar.</p>
+            <button class="btn ghost" id="showSorted" type="button">Ver códigos ordenados</button>
+            <p id="sortedResult" class="small-output"></p>
+            <small class="method">BST y recursividad: makeBST(), findBST(), inorder()</small>
+            <hr>
+            <details><summary>Registrar proveedor</summary><form id="formSupplier" class="inline-form details-form"><input id="supplierName" placeholder="Nombre del proveedor" required><button class="btn secondary">Agregar</button></form><small class="method">Diccionario: addSupplier()</small></details>
+          </div>
+        </div>
+        <div class="card"><h2>Catálogo de productos</h2><p class="muted">Para cambiar existencias, utiliza la sección Inventario.</p><div class="table-scroll"><table><thead><tr><th>Código</th><th>Producto</th><th>Precio</th><th>Unidades totales</th><th>Acciones</th></tr></thead><tbody id="productRows"></tbody></table></div><small class="method">Diccionario: products[sku] · BST: inorder()</small></div>
+      </section>
+
+      <section id="inventario" class="page">
+        <div class="page-heading"><div><h1>Inventario y bodegas</h1><p>Registra entradas y mueve existencias entre ubicaciones.</p></div><span class="tag">Diccionario · Lista · Pila</span></div>
+        <div class="two-columns">
+          <form id="formEntry" class="card"><h2>Entrada de productos</h2>
+            <label>Producto<select id="entrySku"></select></label><label>Bodega<select id="entryLocation"></select></label><label>Cantidad que ingresa<input id="entryQty" type="number" min="1" step="1" value="50" required></label><button class="btn primary">Registrar entrada</button><small class="method">Diccionario: entry() · Pila: push()</small>
+          </form>
+          <form id="formTransfer" class="card"><h2>Transferencia entre bodegas</h2>
+            <label>Producto<select id="transferSku"></select></label><div class="form-grid"><label>Origen<select id="transferFrom"></select></label><label>Destino<select id="transferTo"></select></label></div><label>Cantidad a transferir<input id="transferQty" type="number" min="1" step="1" value="10" required></label><button class="btn primary">Transferir</button><small class="method">Diccionario: transfer() · Pila: push()</small>
+          </form>
+        </div>
+        <div class="card"><h2>Existencias por bodega</h2><div class="table-scroll"><table><thead id="inventoryHeader"></thead><tbody id="inventoryRows"></tbody></table></div><small class="method">Diccionario: getStock()</small></div>
+      </section>
+
+      <section id="ventas" class="page">
+        <div class="page-heading"><div><h1>Ventas</h1><p>Añade productos al carrito y confirma la venta.</p></div><span class="tag">Lista · Diccionario</span></div>
+        <div class="two-columns">
+          <div class="card"><h2>Preparar venta</h2><label>Cliente<select id="saleClient"></select></label>
+            <form id="formCart" class="inline-cart"><label>Producto<select id="saleSku"></select></label><label>Cantidad<input id="saleQty" type="number" min="1" step="1" value="5" required></label><button class="btn secondary">Agregar</button></form>
+            <details><summary>Registrar nuevo cliente</summary><form id="formClient" class="inline-form details-form"><input id="clientName" placeholder="Nombre del cliente" required><button class="btn secondary">Agregar</button></form><small class="method">Diccionario: addClient()</small></details>
+          </div>
+          <div class="card"><h2>Carrito</h2><div id="cartRows"></div><div class="total-row"><label>Descuento<select id="saleDiscount"><option value="0">0%</option><option value="0.1">10% (demo)</option></select></label><div><span>Total:</span><strong id="saleTotal">$0.00</strong></div></div>
+            <button id="confirmSale" class="btn primary" type="button">Registrar venta</button><button id="clearCart" class="btn ghost" type="button">Vaciar carrito</button><small class="method">Lista y diccionario: registerSale()</small>
+          </div>
+        </div>
+        <div class="card"><h2>Ventas registradas</h2><div class="table-scroll"><table><thead><tr><th>ID</th><th>Cliente</th><th>Productos</th><th>Total</th></tr></thead><tbody id="saleRows"></tbody></table></div></div>
+      </section>
+
+      <section id="pedidos" class="page">
+        <div class="page-heading"><div><h1>Pedidos</h1><p>Los pedidos se atienden en el mismo orden en que llegan.</p></div><span class="tag">Cola FIFO</span></div>
+        <div class="two-columns">
+          <form id="formOrder" class="card"><h2>Nuevo pedido</h2><label>Cliente<select id="orderClient"></select></label><label>Producto<select id="orderSku"></select></label><label>Cantidad<input id="orderQty" type="number" min="1" step="1" value="3" required></label><button class="btn primary">Registrar pedido</button><small class="method">Cola FIFO: createOrder() → push()</small></form>
+          <div class="card"><h2>Siguiente por atender</h2><p id="nextOrder" class="order-preview"></p><button id="dispatchOrder" class="btn primary" type="button">Despachar siguiente</button><p class="help">El stock se descuenta al despachar. Si el primer pedido no tiene suficiente stock, permanece primero.</p><small class="method">Cola FIFO: nextOrder(), dispatchOrder()</small></div>
+        </div>
+        <div class="card"><h2>Pedidos por orden de llegada</h2><div class="table-scroll"><table><thead><tr><th>Pedido</th><th>Cliente</th><th>Producto</th><th>Cantidad</th><th>Estado</th></tr></thead><tbody id="orderRows"></tbody></table></div></div>
+      </section>
+
+      <section id="distribucion" class="page">
+        <div class="page-heading"><div><h1>Distribución</h1><p>Consulta cómo se conectan las ubicaciones de ejemplo.</p></div><span class="tag">Grafo · BFS</span></div>
+        <div class="two-columns"><form id="formRoute" class="card"><h2>Consultar camino</h2><label>Origen<select id="routeFrom"></select></label><label>Destino<select id="routeTo"></select></label><button class="btn primary">Consultar ruta</button><p id="routeResult" class="result">Selecciona dos ubicaciones.</p><small class="method">Grafo: shortestPath()</small></form>
+          <div class="card"><h2>Conexiones disponibles</h2><div id="connections"></div><p class="help">Los caminos tienen el menor número de conexiones; no representan distancias, kilómetros ni tiempos reales.</p><small class="method">Lista de adyacencia: rutas[ubicación]</small></div></div>
+      </section>
+
+      <section id="historial" class="page">
+        <div class="page-heading"><div><h1>Historial</h1><p>Consulta las operaciones y revierte la última entrada o transferencia permitida.</p></div><span class="tag">Lista · Pila LIFO</span></div>
+        <div class="card"><div class="card-heading"><div><h2>Movimientos registrados</h2><p class="muted">Las ventas y despachos no se pueden deshacer desde aquí.</p></div><div><button id="undoLast" class="btn secondary" type="button">Deshacer última entrada / transferencia</button></div></div><small class="method">Pila LIFO: undo() → pop()</small><div class="table-scroll"><table><thead><tr><th>Fecha</th><th>Tipo</th><th>Descripción</th></tr></thead><tbody id="historyRows"></tbody></table></div></div>
+      </section>
+    </main>
+  </div>
+  <script>
+/*
+ * Los Manguitos | Reglas de negocio (Laboratorio 3)
+ *
+ * Este archivo contiene los datos y las estructuras, no dibuja pantallas.
+ * ETD: diccionarios, listas, pila LIFO, cola FIFO, BST, grafos y recursividad.
+ * HTML/JS: interfaz y prueba funcional. Python es referencia académica.
+ */
+(function (global) {
+  'use strict';
+
+  const STORAGE_KEY = 'losManguitosLaboratorio3_v1';
+
+  // Las cuatro ubicaciones pertenecen al escenario ficticio del informe.
+  const bodegas = {
+    central: 'Bodega Central',
+    'frio-norte': 'Cámara Frío Norte',
+    occidente: 'Centro Occidente',
+    abastos: 'Terminal Abastos'
+  };
+
+  // GRAFO: cada ubicación apunta a sus vecinos (lista de adyacencia).
+  const rutas = {
+    central: ['frio-norte', 'occidente'],
+    'frio-norte': ['central', 'abastos'],
+    occidente: ['central', 'abastos'],
+    abastos: ['frio-norte', 'occidente']
+  };
+
+  const productosDemo = [
+    ['SKU-MNG-001','Pallet Mango Tommy Atkins (80 Cajas)',920,42,'Pallet','Fruta Fresca'],
+    ['SKU-MNG-002','Pallet Mango Kent Premium (72 Cajas)',980,8,'Pallet','Fruta Fresca'],
+    ['SKU-MNG-003','Caja Mango Ataulfo Selección 4.5kg',16.5,350,'Caja','Fruta Fresca'],
+    ['SKU-MNG-004','Caja Mango Haden Grado A 6kg',19.8,190,'Caja','Fruta Fresca'],
+    ['SKU-MNG-005','Tambor Pulpa Concentrada 200L',420,15,'Tambor','Pulpa Congelada'],
+    ['SKU-MNG-006','Bolsa Mango Deshidratado Natural 1kg',12,640,'Paquete','Derivados Secos'],
+    ['SKU-MNG-007','Caja Cubos Mango IQF Congelados 10kg',38.5,85,'Caja','Pulpa Congelada'],
+    ['SKU-MNG-008','Medio Pallet Variado (40 Cajas Mixtas)',490,12,'Pallet','Empaques'],
+    ['SKU-MNG-KT08','Mango Kent Calibre 8',19.2,650,'Caja','Fruta Fresca'],
+    ['SKU-MNG-AT12','Mango Ataulfo Golden',18.5,420,'Caja','Fruta Fresca'],
+    ['SKU-PLP-MG20K','Pulpa Pasteurizada Congelada 20kg',85,240,'Unidad','Pulpa Congelada'],
+    ['SKU-MNG-TM10','Mango Tommy Atkins Estándar',22,340,'Caja','Fruta Fresca'],
+    ['SKU-DES-MNG05','Mango Deshidratado Tiras 5kg',38.5,105,'Paquete','Derivados Secos']
+  ];
+
+  function fail(message) { throw new Error(message); }
+  function text(value) { return String(value ?? '').trim(); }
+  function positiveInteger(value) {
+    return text(value) !== '' && Number.isSafeInteger(Number(value)) && Number(value) > 0;
+  }
+  function validMoney(value) {
+    return text(value) !== '' && Number.isFinite(Number(value)) && Number(value) >= 0;
+  }
+  function copy(value) { return JSON.parse(JSON.stringify(value)); }
+
+  // Estado inicial: diccionarios de productos/stock y listas de operaciones.
+  function initialState() {
+    const products = {};
+    const inventory = {};
+    Object.keys(bodegas).forEach(location => inventory[location] = {});
+
+    productosDemo.forEach(([sku,nombre,precio,cantidad,unidad,categoria]) => {
+      products[sku] = {sku,nombre,precio,unidad,categoria,minimo:10,proveedorId:'PRV-001'};
+      Object.keys(bodegas).forEach(location => {
+        inventory[location][sku] = location === 'central' ? cantidad : 0;
+      });
+    });
+
+    return {
+      version:1,products,inventory,
+      clients:{
+        'CLI-001':{id:'CLI-001',nombre:'Cliente de Mostrador'},
+        'CLI-002':{id:'CLI-002',nombre:'Supermercados El Trébol'}
+      },
+      suppliers:{'PRV-001':{id:'PRV-001',nombre:'Agroproductores Asociados'}},
+      orders:[],sales:[],transfers:[],movements:[],undo:[],next:1
+    };
+  }
+
+  function load() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved && saved.version === 1 && saved.products && saved.inventory &&
+          Array.isArray(saved.orders) && Array.isArray(saved.movements) &&
+          Array.isArray(saved.sales) && Array.isArray(saved.undo)) return saved;
+    } catch (_) { /* Si no hay datos válidos, iniciamos el ejemplo. */ }
+    return initialState();
+  }
+
+  let state = load();
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (_) { fail('No se pudo guardar. Activa el almacenamiento local del navegador.'); }
+    global.dispatchEvent(new CustomEvent('lm:changed'));
+  }
+  function record(type,description,data = {}) {
+    state.movements.unshift({
+      id:'MOV-' + String(state.next++).padStart(4,'0'),
+      fecha:new Date().toISOString(),tipo:type,descripcion:description,datos:data
+    });
+  }
+  function checkProduct(sku) {
+    if (!state.products[sku]) fail('No existe el producto ' + sku + '.');
+  }
+  function checkLocation(location) {
+    if (!bodegas[location]) fail('La ubicación seleccionada no existe.');
+  }
+
+  // DICCIONARIO: inventory[bodega][SKU] guarda las unidades en cada lugar.
+  function getStock(sku,location = 'central') {
+    return Number(state.inventory[location]?.[sku] || 0);
+  }
+
+  function createProduct(data) {
+    const sku = text(data.sku).toUpperCase();
+    const nombre = text(data.nombre);
+    const precio = Number(data.precio);
+    const stock = Number(data.stock ?? 0);
+    const location = data.bodega || 'central';
+
+    if (!sku || !nombre) fail('Código y nombre son obligatorios.');
+    if (!/^[A-Z0-9_-]{3,32}$/.test(sku)) fail('Código inválido: usa letras, números y guiones.');
+    if (state.products[sku]) fail('Ya existe un producto con ese código.');
+    if (!validMoney(data.precio) || !Number.isSafeInteger(stock) || stock < 0)
+      fail('Precio y existencia deben ser números no negativos.');
+    checkLocation(location);
+    if (data.proveedorId && !state.suppliers[data.proveedorId]) fail('Proveedor inexistente.');
+
+    state.products[sku] = {
+      sku,nombre,precio,
+      unidad:text(data.unidad) || 'Unidad',
+      categoria:text(data.categoria) || 'Fruta Fresca',
+      minimo:10,proveedorId:data.proveedorId || 'PRV-001'
+    };
+    Object.keys(bodegas).forEach(b => state.inventory[b][sku] = (b === location ? stock : 0));
+    record('PRODUCTO','Registrado ' + sku,{sku});
+    if (stock > 0) record('ENTRADA',`Inventario inicial: ${stock} ${sku} en ${bodegas[location]}`);
+    save();
+    return copy(state.products[sku]);
+  }
+
+  function modifyProduct(sku,data) {
+    checkProduct(sku);
+    if (!text(data.nombre) || !validMoney(data.precio)) fail('Nombre y precio válidos son obligatorios.');
+    const p = state.products[sku];
+    p.nombre = text(data.nombre);
+    p.precio = Number(data.precio);
+    p.categoria = text(data.categoria) || p.categoria;
+    p.unidad = text(data.unidad) || p.unidad;
+    if (data.proveedorId && state.suppliers[data.proveedorId]) p.proveedorId = data.proveedorId;
+    record('PRODUCTO','Modificado ' + sku,{sku});
+    save();
+    return copy(p);
+  }
+
+  function deleteProduct(sku) {
+    checkProduct(sku);
+    if (Object.keys(bodegas).some(location => getStock(sku,location) > 0))
+      fail('No se puede eliminar: todavía hay unidades de este producto.');
+    delete state.products[sku];
+    Object.values(state.inventory).forEach(item => delete item[sku]);
+    record('PRODUCTO','Eliminado ' + sku,{sku});
+    save();
+    return true;
+  }
+
+  // ENTRADA: suma unidades y apila una acción que se podría deshacer.
+  function entry(sku,location,qty) {
+    checkProduct(sku);checkLocation(location);
+    if (!positiveInteger(qty)) fail('Ingresa una cantidad entera mayor que cero.');
+    qty = Number(qty);
+    state.inventory[location][sku] = getStock(sku,location) + qty;
+    record('ENTRADA',`Entrada de ${qty} ${sku} a ${bodegas[location]}`);
+    state.undo.push({tipo:'ENTRADA',sku,location,qty}); // PILA LIFO
+    save();
+    return true;
+  }
+
+  function transfer(sku,from,to,qty) {
+    checkProduct(sku);checkLocation(from);checkLocation(to);
+    if (from === to) fail('Origen y destino deben ser distintos.');
+    if (!positiveInteger(qty)) fail('Ingresa una cantidad entera mayor que cero.');
+    qty = Number(qty);
+    if (getStock(sku,from) < qty) fail('Existencias insuficientes en la bodega de origen.');
+
+    state.inventory[from][sku] -= qty;
+    state.inventory[to][sku] = getStock(sku,to) + qty;
+    const id = 'TR-' + String(state.next++).padStart(4,'0');
+    state.transfers.unshift({id,sku,from,to,qty,fecha:new Date().toISOString(),estado:'Recibida (simulación)'});
+    record('TRANSFERENCIA',`${qty} ${sku}: ${bodegas[from]} → ${bodegas[to]}`);
+    state.undo.push({tipo:'TRANSFERENCIA',id,sku,from,to,qty}); // PILA LIFO
+    save();
+    return id;
+  }
+
+  // PILA LIFO: solo deshace entradas y transferencias que todavía pueden revertirse.
+  function undo() {
+    const last = state.undo[state.undo.length - 1];
+    if (!last) fail('No hay acciones para deshacer.');
+
+    if (last.tipo === 'ENTRADA') {
+      if (getStock(last.sku,last.location) < last.qty)
+        fail('No se puede deshacer: las unidades ya se utilizaron.');
+      state.inventory[last.location][last.sku] -= last.qty;
+    } else if (last.tipo === 'TRANSFERENCIA') {
+      if (getStock(last.sku,last.to) < last.qty)
+        fail('No se puede deshacer: las unidades transferidas ya se utilizaron.');
+      state.inventory[last.to][last.sku] -= last.qty;
+      state.inventory[last.from][last.sku] += last.qty;
+      const transfer = state.transfers.find(t => t.id === last.id);
+      if (transfer) transfer.estado = 'Revertida';
+    }
+
+    state.undo.pop(); // Retirar la última acción (LIFO).
+    record('REVERSIÓN','Se deshizo una ' + last.tipo.toLowerCase());
+    save();
+    return true;
+  }
+
+  // VENTAS: comprobar TODOS los productos antes de descontar el primero.
+  function registerSale(lines,clientId = 'CLI-001',discount = 0) {
+    if (!Array.isArray(lines) || lines.length === 0) fail('El carrito está vacío.');
+    if (!state.clients[clientId]) fail('Selecciona un cliente válido.');
+    if (!Number.isFinite(Number(discount)) || Number(discount) < 0 || Number(discount) > 1)
+      fail('Descuento inválido.');
+
+    const quantities = {}; // Agrupar líneas repetidas por SKU (diccionario).
+    lines.forEach(line => {
+      checkProduct(line.sku);
+      if (!positiveInteger(line.qty)) fail('Cantidad de venta inválida.');
+      quantities[line.sku] = (quantities[line.sku] || 0) + Number(line.qty);
+    });
+    Object.entries(quantities).forEach(([sku,qty]) => {
+      if (getStock(sku,'central') < qty) fail(`No hay suficiente stock para ${sku}.`);
+    });
+
+    const detail = Object.entries(quantities).map(([sku,qty]) => ({
+      sku,qty,nombre:state.products[sku].nombre,precio:state.products[sku].precio
+    }));
+    const subtotal = detail.reduce((sum,line) => sum + line.precio * line.qty,0);
+    const total = Math.round(subtotal * (1 - Number(discount)) * 100) / 100;
+    detail.forEach(line => state.inventory.central[line.sku] -= line.qty);
+
+    const sale = {
+      id:'VTA-' + String(state.next++).padStart(4,'0'),
+      fecha:new Date().toISOString(),clientId,lines:detail,subtotal,
+      discount:Number(discount),total,
+      nota:'Comprobante académico; no es factura fiscal.'
+    };
+    state.sales.unshift(sale); // LISTA de ventas; recientes primero.
+    record('VENTA',`Venta ${sale.id} por $${total.toFixed(2)}`);
+    save();
+    return copy(sale);
+  }
+
+  function addClient(name) {
+    const nombre = text(name);
+    if (nombre.length < 2) fail('Ingresa el nombre del cliente.');
+    const id = 'CLI-' + String(state.next++).padStart(4,'0');
+    state.clients[id] = {id,nombre};
+    record('CLIENTE','Registrado ' + nombre);
+    save();
+    return id;
+  }
+  function addSupplier(name) {
+    const nombre = text(name);
+    if (nombre.length < 2) fail('Ingresa el nombre del proveedor.');
+    const id = 'PRV-' + String(state.next++).padStart(4,'0');
+    state.suppliers[id] = {id,nombre};
+    record('PROVEEDOR','Registrado ' + nombre);
+    save();
+    return id;
+  }
+
+  // COLA FIFO: los nuevos pedidos se agregan al final.
+  function createOrder(sku,qty,clientId = 'CLI-001') {
+    checkProduct(sku);
+    if (!positiveInteger(qty)) fail('La cantidad debe ser entera y positiva.');
+    if (!state.clients[clientId]) fail('Selecciona un cliente válido.');
+    const order = {
+      id:'PED-' + String(state.next++).padStart(4,'0'),
+      fecha:new Date().toISOString(),sku,qty:Number(qty),clientId,estado:'Pendiente'
+    };
+    state.orders.push(order); // Enqueue: agregar al final.
+    record('PEDIDO','Registrado ' + order.id);
+    save();
+    return copy(order);
+  }
+  function nextOrder() {
+    return state.orders.find(order => order.estado === 'Pendiente') || null;
+  }
+  function dispatchOrder() {
+    const order = nextOrder(); // El primero pendiente, sin adelantar otros.
+    if (!order) fail('No hay pedidos pendientes.');
+    if (getStock(order.sku,'central') < order.qty)
+      fail(`El pedido ${order.id} no tiene stock suficiente en Central. No se salta su turno.`);
+
+    state.inventory.central[order.sku] -= order.qty;
+    order.estado = 'Despachado'; // Conserva la historia en vez de borrar.
+    order.despachadoEn = new Date().toISOString();
+    record('DESPACHO','Despachado ' + order.id + ' (FIFO)');
+    save();
+    return copy(order);
+  }
+
+  // GRAFO + BFS: devuelve un camino con menos conexiones (NO kilómetros).
+  function shortestPath(from,to) {
+    checkLocation(from);checkLocation(to);
+    const queue = [[from]];
+    const visited = new Set([from]);
+    while (queue.length > 0) {
+      const path = queue.shift(); // Atender el primer camino de la cola.
+      const current = path[path.length - 1];
+      if (current === to) return path;
+      for (const neighbor of rutas[current] || []) {
+        if (!visited.has(neighbor)) {
+          visited.add(neighbor);
+          queue.push([...path,neighbor]);
+        }
+      }
+    }
+    return null;
+  }
+
+  // ÁRBOL BST por código SKU. El código completo sigue en un diccionario.
+  function insert(node,sku) {
+    if (!node) return {sku,izquierda:null,derecha:null}; // Caso base recursivo.
+    if (sku < node.sku) node.izquierda = insert(node.izquierda,sku);
+    else if (sku > node.sku) node.derecha = insert(node.derecha,sku);
+    return node;
+  }
+  function makeBST() {
+    let root = null;
+    Object.keys(state.products).forEach(sku => root = insert(root,sku));
+    return root;
+  }
+  function findBST(node,sku) {
+    if (!node) return null; // No encontrado.
+    if (node.sku === sku) return state.products[sku];
+    return sku < node.sku ? findBST(node.izquierda,sku) : findBST(node.derecha,sku);
+  }
+  function inorder(node,result = []) {
+    if (!node) return result;
+    inorder(node.izquierda,result);
+    result.push(node.sku);
+    inorder(node.derecha,result);
+    return result;
+  }
+
+  function reset() {state = initialState();save();}
+  function escape(value) {
+    return String(value ?? '').replace(/[&<>"']/g,character => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[character]));
+  }
+
+  // Operaciones públicas: js/app.js llama a estas funciones desde la interfaz.
+  global.LM = {
+    get state() {return state;},
+    bodegas,rutas,getStock,createProduct,modifyProduct,deleteProduct,
+    entry,transfer,undo,registerSale,addClient,addSupplier,
+    createOrder,nextOrder,dispatchOrder,shortestPath,
+    makeBST,findBST,inorder,reset,escape
+  };
+})(window);
+
+</script>
+  <script>
+/* Los Manguitos — interfaz simplificada para la defensa del Laboratorio 3.
+ * Este archivo solo lee formularios y muestra resultados.
+ * TODAS las reglas y estructuras de datos están en store.js (window.LM).
+ */
+(function () {
+  'use strict';
+
+  const db = window.LM;
+  const $ = id => document.getElementById(id);
+  const esc = db.escape;
+  const money = n => '$' + Number(n || 0).toFixed(2);
+  const product = sku => db.state.products[sku];
+  let editingSku = null;
+  let cart = []; // Lista temporal: productos elegidos antes de registrar la venta.
+
+  // Una sola función controla los avisos de éxito y error.
+  function notify(message, isError = false) {
+    const box = $('notice');
+    box.textContent = message;
+    box.hidden = false;
+    box.className = isError ? 'error' : '';
+    box.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  }
+
+  function tryOperation(action, success) {
+    try {
+      const result = action();
+      notify(typeof success === 'function' ? success(result) : success);
+      return result;
+    } catch (error) {
+      notify(error.message || String(error), true);
+      return null;
+    }
+  }
+
+  // Cambiar de módulo sin abrir muchas páginas diferentes.
+  const pages = ['inicio','productos','inventario','ventas','pedidos','distribucion','historial'];
+  function showPage(name) {
+    if (!pages.includes(name)) name = 'inicio';
+    document.querySelectorAll('.page').forEach(el => el.classList.toggle('active', el.id === name));
+    document.querySelectorAll('#menu button').forEach(el => el.classList.toggle('active', el.dataset.page === name));
+    $('notice').hidden = true;
+  }
+  document.querySelectorAll('#menu button').forEach(button => {
+    button.addEventListener('click', () => { location.hash = button.dataset.page; showPage(button.dataset.page); });
+  });
+  window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
+
+  // Los select se actualizan cuando el usuario registra un producto o cliente.
+  function fillSelect(id, entries, defaultValue) {
+    const select = $(id);
+    const previous = select.value || defaultValue;
+    select.innerHTML = entries.map(([value, label]) =>
+      `<option value="${esc(value)}">${esc(label)}</option>`).join('');
+    if (entries.some(([value]) => value === previous)) select.value = previous;
+  }
+  function productOptions() {
+    return db.inorder(db.makeBST()).map(sku => [sku, `${product(sku).nombre} (${sku})`]);
+  }
+  function locationOptions() { return Object.entries(db.bodegas); }
+  function clientOptions() { return Object.values(db.state.clients).map(c => [c.id,c.nombre]); }
+  function supplierOptions() { return Object.values(db.state.suppliers).map(p => [p.id,p.nombre]); }
+  function refreshOptions() {
+    const products = productOptions(), locations = locationOptions();
+    ['entrySku','transferSku','saleSku','orderSku'].forEach(id => fillSelect(id, products));
+    ['entryLocation','transferFrom','transferTo','routeFrom','routeTo','productLocation'].forEach(id => fillSelect(id, locations));
+    ['saleClient','orderClient'].forEach(id => fillSelect(id, clientOptions()));
+    fillSelect('productSupplier', supplierOptions());
+    if ($('transferTo').value === $('transferFrom').value) $('transferTo').value = 'abastos';
+    if ($('routeTo').value === $('routeFrom').value) $('routeTo').value = 'abastos';
+  }
+
+  // INICIO: los indicadores proceden del estado, no de números decorativos.
+  function renderHome() {
+    const s = db.state;
+    const totalUnits = Object.keys(db.bodegas).reduce((sum,location) =>
+      sum + Object.keys(s.products).reduce((n,sku) => n + db.getStock(sku,location),0),0);
+    const metrics = [
+      [Object.keys(s.products).length,'Productos'],[totalUnits,'Unidades en inventario'],
+      [s.sales.length,'Ventas realizadas'],[s.orders.filter(o => o.estado === 'Pendiente').length,'Pedidos pendientes']
+    ];
+    $('metrics').innerHTML = metrics.map(([value,title]) =>
+      `<div class="metric"><strong>${value}</strong><span>${title}</span></div>`).join('');
+    $('recent').innerHTML = s.movements.length ?
+      `<div class="table-scroll"><table><thead><tr><th>Tipo</th><th>Movimiento</th></tr></thead><tbody>${s.movements.slice(0,5).map(m =>
+        `<tr><td>${esc(m.tipo)}</td><td>${esc(m.descripcion)}</td></tr>`).join('')}</tbody></table></div>` :
+      '<p class="muted">Aún no se registran movimientos.</p>';
+  }
+
+  // PRODUCTOS: diccionario para registrar, BST para buscar por código.
+  function renderProducts() {
+    const codes = db.inorder(db.makeBST());
+    $('productRows').innerHTML = codes.map(sku => {
+      const p = product(sku);
+      const qty = Object.keys(db.bodegas).reduce((sum,location) => sum + db.getStock(sku,location),0);
+      return `<tr><td>${esc(sku)}</td><td>${esc(p.nombre)}</td><td>${money(p.precio)}</td><td>${qty}</td>
+        <td><div class="tiny-actions"><button type="button" class="btn secondary" data-edit="${esc(sku)}">Editar</button>
+        <button type="button" class="btn danger" data-delete="${esc(sku)}">Eliminar</button></div></td></tr>`;
+    }).join('');
+  }
+  function clearProductForm() {
+    editingSku = null;
+    $('formProduct').reset();
+    $('productSku').disabled = false;
+    $('productStock').disabled = false;
+    $('productLocation').disabled = false;
+    $('productFormTitle').textContent = 'Nuevo producto';
+    $('saveProduct').textContent = 'Guardar producto';
+    $('cancelEdit').hidden = true;
+    $('productStock').value = 0;
+  }
+  $('formProduct').addEventListener('submit', e => {
+    e.preventDefault();
+    const input = {
+      sku: $('productSku').value, nombre: $('productName').value,
+      precio: $('productPrice').value, stock: $('productStock').value,
+      bodega: $('productLocation').value, categoria: $('productCategory').value,
+      unidad: $('productUnit').value, proveedorId: $('productSupplier').value
+    };
+    const response = tryOperation(() => editingSku ? db.modifyProduct(editingSku,input) : db.createProduct(input),
+      editingSku ? 'Producto actualizado.' : 'Producto registrado correctamente.');
+    if (response !== null) clearProductForm();
+  });
+  $('cancelEdit').addEventListener('click',clearProductForm);
+  $('productRows').addEventListener('click',e => {
+    const edit = e.target.closest('[data-edit]');
+    const remove = e.target.closest('[data-delete]');
+    if (edit) {
+      editingSku = edit.dataset.edit;
+      const p = product(editingSku);
+      $('productSku').value = p.sku;
+      $('productName').value = p.nombre;
+      $('productPrice').value = p.precio;
+      $('productStock').value = 0;
+      $('productCategory').value = p.categoria;
+      $('productUnit').value = p.unidad;
+      if (p.proveedorId && db.state.suppliers[p.proveedorId]) $('productSupplier').value = p.proveedorId;
+      $('productSku').disabled = true;
+      $('productStock').disabled = true;
+      $('productLocation').disabled = true;
+      $('productFormTitle').textContent = 'Editar producto ' + p.sku;
+      $('saveProduct').textContent = 'Guardar cambios';
+      $('cancelEdit').hidden = false;
+      $('formProduct').scrollIntoView({block:'center',behavior:'smooth'});
+    }
+    if (remove && confirm(`¿Eliminar ${remove.dataset.delete}? Solo es posible si no tiene existencias.`)) {
+      tryOperation(() => { db.deleteProduct(remove.dataset.delete); return true; },'Producto eliminado.');
+    }
+  });
+  $('formSearch').addEventListener('submit', e => {
+    e.preventDefault();
+    const sku = $('searchSku').value.trim().toUpperCase();
+    const found = db.findBST(db.makeBST(),sku);
+    $('searchResult').textContent = found ? `Encontrado: ${found.nombre} (${found.sku})` : 'No existe un producto con ese código.';
+  });
+  $('showSorted').addEventListener('click', () => {
+    $('sortedResult').textContent = db.inorder(db.makeBST()).join(', ') || 'Sin productos';
+  });
+  $('formSupplier').addEventListener('submit',e => {
+    e.preventDefault();
+    if (tryOperation(() => db.addSupplier($('supplierName').value),'Proveedor agregado.') !== null) e.target.reset();
+  });
+
+  // INVENTARIO: cada movimiento actualiza la bodega correspondiente.
+  function renderInventory() {
+    $('inventoryHeader').innerHTML = '<tr><th>Producto</th>' +
+      Object.values(db.bodegas).map(label => `<th>${esc(label)}</th>`).join('') + '</tr>';
+    $('inventoryRows').innerHTML = db.inorder(db.makeBST()).map(sku =>
+      `<tr><td>${esc(product(sku).nombre)}</td>${Object.keys(db.bodegas).map(loc =>
+        `<td>${db.getStock(sku,loc)}</td>`).join('')}</tr>`).join('');
+  }
+  $('formEntry').addEventListener('submit',e => {
+    e.preventDefault();
+    tryOperation(() => { db.entry($('entrySku').value,$('entryLocation').value,$('entryQty').value);return true; },'Entrada registrada: las existencias se actualizaron.');
+  });
+  $('formTransfer').addEventListener('submit',e => {
+    e.preventDefault();
+    tryOperation(() => db.transfer($('transferSku').value,$('transferFrom').value,$('transferTo').value,$('transferQty').value),
+      id => `Transferencia ${id} registrada. El total de unidades no cambia.`);
+  });
+
+  // VENTAS: el carrito es una lista; registerSale() valida TODO antes de descontar.
+  function renderCart() {
+    if (cart.length === 0) $('cartRows').innerHTML = '<p class="muted">Carrito vacío.</p>';
+    else $('cartRows').innerHTML = cart.map((x,i) =>
+      `<div class="inline-cart-list"><span>${esc(product(x.sku)?.nombre || x.sku)} × ${x.qty}</span>
+      <span>${money((product(x.sku)?.precio || 0)*x.qty)} <button class="btn ghost" data-remove-cart="${i}" type="button">Quitar</button></span></div>`).join('');
+    const subtotal = cart.reduce((sum,x) => sum + (product(x.sku)?.precio || 0)*x.qty,0);
+    $('saleTotal').textContent = money(subtotal*(1-Number($('saleDiscount').value)));
+    $('confirmSale').disabled = !cart.length;
+  }
+  $('formCart').addEventListener('submit',e => {
+    e.preventDefault();
+    const sku = $('saleSku').value, qty = Number($('saleQty').value);
+    const inCart = cart.filter(p => p.sku === sku).reduce((sum,p) => sum+p.qty,0);
+    if (!Number.isSafeInteger(qty) || qty < 1) return notify('La cantidad debe ser un entero mayor que cero.',true);
+    if (inCart+qty > db.getStock(sku,'central')) return notify('No hay suficientes unidades en Bodega Central.',true);
+    cart.push({sku,qty}); // En la confirmación, el modelo agrupa líneas repetidas.
+    renderCart();
+    notify('Producto agregado al carrito.');
+  });
+  $('cartRows').addEventListener('click',e => {
+    const button = e.target.closest('[data-remove-cart]');
+    if (button) { cart.splice(Number(button.dataset.removeCart),1);renderCart(); }
+  });
+  $('saleDiscount').addEventListener('change',renderCart);
+  $('clearCart').addEventListener('click', () => {cart=[];renderCart();});
+  $('confirmSale').addEventListener('click', () => {
+    const sale = tryOperation(() => db.registerSale(cart,$('saleClient').value,$('saleDiscount').value),
+      value => `Venta ${value.id} registrada por ${money(value.total)}. Inventario actualizado.`);
+    if (sale) {cart=[];renderCart();}
+  });
+  $('formClient').addEventListener('submit',e => {
+    e.preventDefault();
+    if (tryOperation(() => db.addClient($('clientName').value),'Cliente agregado.') !== null) e.target.reset();
+  });
+  function renderSales() {
+    $('saleRows').innerHTML = db.state.sales.length ? db.state.sales.map(s => {
+      const name = db.state.clients[s.clientId]?.nombre || s.clientId;
+      return `<tr><td>${esc(s.id)}</td><td>${esc(name)}</td><td>${s.lines.map(x => esc(x.nombre)+' × '+x.qty).join(', ')}</td><td>${money(s.total)}</td></tr>`;
+    }).join('') : '<tr><td class="empty" colspan="4">No hay ventas registradas.</td></tr>';
+  }
+
+  // PEDIDOS: se conservan los pedidos despachados para mostrar el orden FIFO.
+  $('formOrder').addEventListener('submit',e => {
+    e.preventDefault();
+    tryOperation(() => db.createOrder($('orderSku').value,$('orderQty').value,$('orderClient').value),
+      order => `Pedido ${order.id} agregado al final de la cola.`);
+  });
+  $('dispatchOrder').addEventListener('click',() => {
+    tryOperation(() => db.dispatchOrder(), order => `Pedido ${order.id} despachado. Se descontó su stock de Central.`);
+  });
+  function renderOrders() {
+    const next = db.nextOrder();
+    $('nextOrder').textContent = next ? `${next.id} · ${product(next.sku)?.nombre || next.sku} · ${next.qty} unidad(es)` : 'No hay pedidos pendientes.';
+    $('dispatchOrder').disabled = !next;
+    $('orderRows').innerHTML = db.state.orders.length ? db.state.orders.map(o => {
+      const first = next?.id === o.id;
+      return `<tr><td>${esc(o.id)} ${first ? '<span class="pill next">Siguiente</span>' : ''}</td><td>${esc(db.state.clients[o.clientId]?.nombre || o.clientId)}</td>
+        <td>${esc(product(o.sku)?.nombre || o.sku)}</td><td>${o.qty}</td><td><span class="pill ${o.estado === 'Pendiente' ? 'pending' : ''}">${esc(o.estado)}</span></td></tr>`;
+    }).join('') : '<tr><td class="empty" colspan="5">Todavía no se registran pedidos.</td></tr>';
+  }
+
+  // DISTRIBUCIÓN: grafo no dirigido de cuatro ubicaciones ficticias.
+  function renderConnections() {
+    $('connections').innerHTML = Object.entries(db.rutas).map(([location,neighbors]) =>
+      `<div class="connection"><strong>${esc(db.bodegas[location])}</strong> → ${neighbors.map(id => esc(db.bodegas[id])).join(', ')}</div>`).join('');
+  }
+  $('formRoute').addEventListener('submit',e => {
+    e.preventDefault();
+    const route = tryOperation(() => db.shortestPath($('routeFrom').value,$('routeTo').value),
+      path => path ? `Camino encontrado (${path.length-1} conexión/es).` : 'No existe conexión.');
+    $('routeResult').textContent = route ? route.map(loc => db.bodegas[loc]).join(' → ') : 'No se encontró una ruta.';
+  });
+
+  // HISTORIAL: la pila revierte solamente entradas y transferencias, nunca ventas.
+  function renderHistory() {
+    $('historyRows').innerHTML = db.state.movements.length ? db.state.movements.map(m =>
+      `<tr><td>${new Date(m.fecha).toLocaleString('es-SV')}</td><td>${esc(m.tipo)}</td><td>${esc(m.descripcion)}</td></tr>`).join('') :
+      '<tr><td colspan="3" class="empty">Sin movimientos.</td></tr>';
+    $('undoLast').disabled = db.state.undo.length === 0;
+  }
+  $('undoLast').addEventListener('click',() => tryOperation(() => {db.undo();return true;},'Última operación reversible deshecha. Los movimientos permanecen en el historial.'));
+  $('resetTop').addEventListener('click', () => {
+    if (confirm('¿Restablecer todos los datos ficticios? Se perderán los cambios locales.')) {
+      db.reset();
+      cart=[];
+      clearProductForm();
+      renderCart();
+      $('searchSku').value = '';
+      $('searchResult').textContent = 'Escribe el SKU y presiona Buscar.';
+      $('sortedResult').textContent = '';
+      $('routeResult').textContent = 'Selecciona dos ubicaciones.';
+      notify('Se restauraron los datos de ejemplo.');
+    }
+  });
+
+  // Cada cambio se guarda en store.js y actualiza todas las pantallas.
+  function renderAll() {
+    refreshOptions();renderHome();renderProducts();renderInventory();renderSales();
+    renderOrders();renderHistory();renderCart();renderConnections();
+  }
+  window.addEventListener('lm:changed',renderAll);
+  renderAll();
+  showPage(location.hash.slice(1));
+})();
+
+</script>
+</body>
+</html>
